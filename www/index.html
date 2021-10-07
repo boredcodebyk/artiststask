@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Artist's Task</title>
+  
+  <!-- HTML -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap/icons/bootstrap-icons.css">
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <div class="container-md">
+      <a class="navbar-brand" href="#">Artist's Task</a>
+      <span style="float:right;">
+        <a class="btn" data-bs-toggle="modal" data-bs-target="#about"><i class="bi bi-info-square"></i>
+        </a>
+        <a style="float:right;" class="btn" data-bs-toggle="modal" data-bs-target="#createTask"><i class="bi bi-plus-square"></i></a>
+      </span>
+    </div>
+  </nav>
+  <div class="app" style="margin-top: 80px">
+
+    <div class="container-md">
+      <div class="row p-3" id="todoList"></div>
+    </div>
+    <div class="modal fade" id="createTask" tabindex="-1" aria-labelledby="createTaskLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="createTask" tabindex="-1" aria-labelledby="createTaskLabel" aria-hidden="true">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createTaskLabel">Create your task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="taskform" method="post">
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Task</label>
+                <input required type="text" class="form-control" name="task" id="exampleFormControlInput1" placeholder="Task">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3" name="remark"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="customRange2" class="form-label">Progress</label>
+                <input required type="range" class="form-range" min="0" max="4" id="customRange2" name="progress">
+              </div>
+              <div class="mb-3">
+                
+                <label class="form-label" for="priority">Priority</label>
+                <select id="priority" required class="form-control" name="priority">
+                  <option name="low">Low</option>
+                  <option name="moderate">Moderate</option>
+                  <option name="high">High</option>
+                </select> 
+              </div>
+              <div required class="mb-3">
+                <label class="form-label" for="date">Deadline</label>
+                <input type="date" name="date" id="date" class="form-control">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" name="submit"  data-bs-dismiss="modal" id="saveTask" class="btn btn-primary">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="about" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="about" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="aboutLabel">About</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Hi, I'm K, goes with alias <a href="https://sktchbyk.carrd.co/" target="_blank">sktchbyk</a> and <a href="https://github.com/boredcodebyk" target="_blank">boredcodebyk</a>. I'm an artist but I sometimes play with coding.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="todoMore" tabindex="-1" aria-labelledby="todoMoreLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="todoMore" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true">
+        <span id="moreMain" style="width: 100%;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="todoMoreLabel">Edit your task</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="edittaskform" method="post">
+                <div class="mb-3">
+                  <label for="editTask" class="form-label">Task</label>
+                  <input required type="text" class="form-control" name="etask" id="editTask" placeholder="Task">
+                </div>
+                <div class="mb-3">
+                  <label for="editRemark" class="form-label">Description</label>
+                  <textarea required class="form-control" id="editRemark" rows="3" name="eremark"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="editProgress" class="form-label">Progress</label>
+                  <input required type="range" class="form-range" min="0" max="4" id="editProgress" name="eprogress">
+                </div>
+                <div class="mb-3">
+                  
+                  <label class="form-label" for="editPriority">Priority</label>
+                  <select id="editPriority" required class="form-control" name="epriority">
+                    <option name="elow">Low</option>
+                    <option name="emoderate">Moderate</option>
+                    <option name="ehigh">High</option>
+                  </select> 
+                </div>
+                <div required class="mb-3">
+                  <label class="form-label" for="edate">Deadline</label>
+                  <input type="date" name="edate" id="edate" class="form-control">
+                </div>
+                <div class="mb-3 row">
+                  <div class="col-12 col-sm-6"><input required type="text" class="form-control" name="__id" id="__id" disabled></div>
+                  <div class="col-12 col-sm-6"><input required type="text" class="form-control" name="__rev" id="__rev" disabled></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" style="float: left;" id="delete" data-bs-dismiss="modal">Delete</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" name="submit"  data-bs-dismiss="modal" id="editTaskSubmit" class="btn btn-primary">Edit</button>
+              </form>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- Project -->
+  <script src="cordova.js"></script>
+  <script src="js/pouchdb-7.2.1.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
