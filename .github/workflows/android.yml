@@ -1,0 +1,21 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use buluma/setup-cordova
+        uses: buluma/setup-cordova@v0.0.3
+        with:
+          exec: |
+            cordova platform add android && \
+            cordova build --no-telemetry && \
+            cp "$(find . -name '*.apk')" .
