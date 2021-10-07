@@ -21,6 +21,10 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+        with: 
+          exec: |
+            export ANDROID_SDK_ROOT=/opt/hostedtoolcache/android/sdk/ && \
+            export ANDROID_HOME=/opt/hostedtoolcache/android/sdk/
 
 
       - name: Use oxr463/setup-cordova
